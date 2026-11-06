@@ -1,9 +1,13 @@
 const express = require('express');
 const app = express();
+const path = require('path'); 
 const PORT = process.env.PORT || 3000;
 
 // Middleware - JSON formatında veri almak için
 app.use(express.json());
+
+// Static dosyaları (frontend) dışarı sunma
+app.use(express.static('src/public'));
 
 // In-Memory Veri Deposu (Geçici olarak bellek üzerinde tutuyoruz)
 let tickets = [
