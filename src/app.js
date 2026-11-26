@@ -80,6 +80,19 @@ app.put('/api/tickets/:id', (req, res) => {
   res.status(200).json(ticket);
 });
 
+// F4: Destek Talebini Silme (DELETE)
+app.delete('/api/tickets/:id', (req, res) => {
+  const ticketId = parseInt(req.params.id);
+  const index = tickets.findIndex(t => t.id === ticketId);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Silinecek talep bulunamadı.' });
+  }
+
+  tickets.splice(index, 1);
+  res.status(200).json({ message: 'Talep başarıyla silindi.' });
+});
+
 // Sunucuyu Başlatma
 if (require.main === module) {
   app.listen(PORT, () => {
