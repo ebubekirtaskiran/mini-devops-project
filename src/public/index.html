@@ -96,6 +96,7 @@
                                     <button onclick="updateStatus(${ticket.id}, 'In Progress')" class="btn btn-sm btn-outline-warning me-1">İşleme Al</button>
                                     <button onclick="updateStatus(${ticket.id}, 'Closed')" class="btn btn-sm btn-outline-success">Kapat</button>
                                 ` : '<span class="text-success small fw-bold">✓ Tamamlandı</span>'}
+                                <button onclick="deleteTicket(${ticket.id})" class="btn btn-sm btn-outline-danger ms-1">Sil</button>
                             </div>
                         </div>
                     </div>
@@ -128,6 +129,12 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })
             });
+            fetchTickets();
+        }
+
+        // Talebi Sil
+        async function deleteTicket(id) {
+            await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
             fetchTickets();
         }
 
